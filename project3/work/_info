@@ -1,0 +1,113 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/Panda/ECE 552/riscv32i-arch-course-starter-fa26/project3
+vALU_Control
+Z1 !s110 1791404351
+!i10b 1
+!s100 JB<^YD`zm8eckNKEn<eg@2
+Ik9R[3G:m9dKo=e0jCfXUI1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1791404237
+8rtl/ALU_Control.v
+Frtl/ALU_Control.v
+L0 3
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z4 !s108 1791404351.000000
+Z5 !s107 tb/control_unit_tb.v|rtl/control_unit.v|rtl/Branch_Control.v|rtl/ALU_Control.v|rtl/OP_Control.v|
+Z6 !s90 rtl/OP_Control.v|rtl/ALU_Control.v|rtl/Branch_Control.v|rtl/control_unit.v|tb/control_unit_tb.v|
+!i113 1
+Z7 tCvgOpt 0
+n@a@l@u_@control
+vBranch_Control
+R1
+!i10b 1
+!s100 LReIA<emgU_f3BkAQcLX13
+IK_TBDa^1N@2z0ALH=LYO71
+R2
+R0
+w1791403573
+8rtl/Branch_Control.v
+Frtl/Branch_Control.v
+L0 3
+R3
+r1
+!s85 0
+31
+R4
+R5
+R6
+!i113 1
+R7
+n@branch_@control
+vcontrol_unit
+R1
+!i10b 1
+!s100 2P6S@la]?SF28a>i`m;]V1
+IITefm__a`J>mSU4oi_6S11
+R2
+R0
+w1791403710
+8rtl/control_unit.v
+Frtl/control_unit.v
+L0 3
+R3
+r1
+!s85 0
+31
+R4
+R5
+R6
+!i113 1
+R7
+vcontrol_unit_tb
+R1
+!i10b 1
+!s100 LIIeDVJ>4G2VNGb78=VkJ2
+I7EPVD4_3A[8O8n6A9B_[B0
+R2
+R0
+w1791404351
+8tb/control_unit_tb.v
+Ftb/control_unit_tb.v
+L0 5
+R3
+r1
+!s85 0
+31
+R4
+R5
+R6
+!i113 1
+R7
+vOP_Control
+R1
+!i10b 1
+!s100 `bXb75@TYUKQ5=j[N?eel2
+I?Fi8U[>4d2Xn`41JFVfGD0
+R2
+R0
+w1791403731
+8rtl/OP_Control.v
+Frtl/OP_Control.v
+L0 3
+R3
+r1
+!s85 0
+31
+R4
+R5
+R6
+!i113 1
+R7
+n@o@p_@control
