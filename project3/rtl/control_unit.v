@@ -21,7 +21,7 @@ module control_unit(
    // Signal to determine if we have a branch instruction
    output wire       Branch,
    // Signal determining the operation the ALU will do
-   output wire [3:0] ALUop,
+   output wire [2:0] ALUop,
    // Signal indicating if we should take the branch or not
    output wire       BranchTaken,
    // Signals selecting the jump target/writeback path

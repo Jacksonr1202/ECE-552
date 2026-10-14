@@ -16,9 +16,6 @@ module IF#(
 wire [31:0] next_pc;
 wire [31:0] pc_target;
 wire [31:0] jalr_target;
-wire [31:0] i_imem_raddr;
-wire [31:0] i_imem_rdata;
-
 // PC + 4 ADDER
 assign pc_plus4 = pc + 32'd4;
 
@@ -32,7 +29,7 @@ assign jalr_target = (rs1_data + imm) & (~32'd1);
 assign next_pc = (PC_sel == 2'b00) ? pc_plus4 : (PC_sel == 2'b01) ? pc_target : (PC_sel == 2'b10) ? jalr_target : pc_plus4;
 
 // PC Register
-always @(posedge i_clk or negedge i_rst) begin
+always @(posedge i_clk) begin
     if (i_rst) begin
         pc <= RESET_ADDR;
     end else begin
@@ -41,7 +38,6 @@ always @(posedge i_clk or negedge i_rst) begin
 end
 
 // Instruction Memory
-assign i_imem_raddr = pc;
 assign inst = i_imem_rdata;
 
 endmodule

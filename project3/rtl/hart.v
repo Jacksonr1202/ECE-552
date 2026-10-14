@@ -131,8 +131,218 @@ module hart #(
     ,`RVFI_OUTPUTS,
 `endif
 );
-    // Fill in your implementation here.
-    
+    localparam [6:0] OPCODE_LOAD   = 7'b0000011;
+    localparam [6:0] OPCODE_STORE  = 7'b0100011;
+    localparam [6:0] OPCODE_BRANCH = 7'b1100011;
+    localparam [6:0] OPCODE_JAL    = 7'b1101111;
+    localparam [6:0] OPCODE_JALR   = 7'b1100111;
+    localparam [6:0] OPCODE_LUI    = 7'b0110111;
+    localparam [6:0] OPCODE_AUIPC  = 7'b0010111;
+    localparam [6:0] OPCODE_OPIMM  = 7'b0010011;
+    localparam [6:0] OPCODE_OP     = 7'b0110011;
+    localparam [6:0] OPCODE_SYSTEM = 7'b1110011;
+
+    wire [31:0] inst;
+    wire [31:0] pc;
+    wire [31:0] pc_plus4;
+    wire [31:0] immediate;
+    wire [31:0] rs1_data;
+    wire [31:0] rs2_data;
+    wire [31:0] alu_result;
+    wire [31:0] load_data;
+    wire [31:0] shifted_load_data;
+    wire [31:0] writeback_data;
+    wire [31:0] store_data;
+    wire [31:0] target_address;
+    wire [3:0]  dmem_mask;
+    wire [1:0]  pc_sel;
+    wire [2:0]  alu_op;
+    wire        reg_write;
+    wire        alu_src;
+    wire        mem_to_reg;
+    wire        mem_read;
+    wire        mem_write;
+    wire        branch;
+    wire        branch_taken;
+    wire        jal;
+    wire        jalr;
+    wire        alu_eq;
+    wire        alu_lt;
+    wire        alu_ltu;
+    wire        alu_unsigned;
+    wire        alu_sub;
+    wire        alu_arith;
+    wire [5:0]  imm_format;
+    wire        is_load;
+    wire        is_store;
+    wire        is_control_flow;
+    wire        is_supported;
+    wire        misaligned_data;
+    wire        misaligned_target;
+    wire [1:0]  byte_offset;
+
+    assign o_imem_raddr = pc;
+
+    assign is_load  = (inst[6:0] == OPCODE_LOAD);
+    assign is_store = (inst[6:0] == OPCODE_STORE);
+    assign is_control_flow = branch | jal | jalr;
+
+    assign imm_format[0] = (inst[6:0] == OPCODE_OP);
+    assign imm_format[1] = (inst[6:0] == OPCODE_OPIMM) |
+                           (inst[6:0] == OPCODE_LOAD) |
+                           (inst[6:0] == OPCODE_JALR);
+    assign imm_format[2] = is_store;
+    assign imm_format[3] = (inst[6:0] == OPCODE_BRANCH);
+    assign imm_format[4] = (inst[6:0] == OPCODE_LUI) |
+                           (inst[6:0] == OPCODE_AUIPC);
+    assign imm_format[5] = (inst[6:0] == OPCODE_JAL);
+
+    assign alu_unsigned = ((inst[6:0] == OPCODE_OP) ||
+                           (inst[6:0] == OPCODE_OPIMM)) &&
+                          (inst[14:12] == 3'b011) |
+                          (branch && ((inst[14:12] == 3'b110) ||
+                                      (inst[14:12] == 3'b111)));
+    assign alu_sub = branch |
+                     ((inst[6:0] == OPCODE_OP) &&
+                      (inst[14:12] == 3'b000) && inst[30]);
+    assign alu_arith = ((inst[6:0] == OPCODE_OP) ||
+                        (inst[6:0] == OPCODE_OPIMM)) &&
+                       (inst[14:12] == 3'b101) && inst[30];
+
+    assign is_supported = (inst[6:0] == OPCODE_LOAD) |
+                          (inst[6:0] == OPCODE_STORE) |
+                          (inst[6:0] == OPCODE_BRANCH) |
+                          (inst[6:0] == OPCODE_JAL) |
+                          (inst[6:0] == OPCODE_JALR) |
+                          (inst[6:0] == OPCODE_LUI) |
+                          (inst[6:0] == OPCODE_AUIPC) |
+                          (inst[6:0] == OPCODE_OPIMM) |
+                          (inst[6:0] == OPCODE_OP) |
+                          ((inst[6:0] == OPCODE_SYSTEM) &&
+                           ((inst[31:20] == 12'b0) ||
+                            (inst[31:20] == 12'b1)));
+
+    imm immediate_generator (
+        .i_inst      (inst),
+        .i_format    (imm_format),
+        .o_immediate (immediate)
+    );
+
+    IF #(
+        .RESET_ADDR (RESET_ADDR)
+    ) instruction_fetch (
+        .i_clk       (i_clk),
+        .i_rst       (i_rst),
+        .i_imem_rdata(i_imem_rdata),
+        .PC_sel      (pc_sel),
+        .imm         (immediate),
+        .rs1_data    (rs1_data),
+        .pc_plus4    (pc_plus4),
+        .pc          (pc),
+        .inst        (inst)
+    );
+
+    control_unit control (
+        .inst        (inst),
+        .Eq          (alu_eq),
+        .LT          (alu_lt),
+        .LTU         (alu_ltu),
+        .RegWrite    (reg_write),
+        .ALUsrc      (alu_src),
+        .MemToReg    (mem_to_reg),
+        .MemRead     (mem_read),
+        .MemWrite    (mem_write),
+        .Branch      (branch),
+        .ALUop       (alu_op),
+        .BranchTaken (branch_taken),
+        .JAL         (jal),
+        .JALR        (jalr),
+        .PC_sel      (pc_sel)
+    );
+
+    rf #(
+        .BYPASS_EN (0)
+    ) registers (
+        .i_clk      (i_clk),
+        .i_rst      (i_rst),
+        .i_rs1_raddr(inst[19:15]),
+        .o_rs1_rdata(rs1_data),
+        .i_rs2_raddr(inst[24:20]),
+        .o_rs2_rdata(rs2_data),
+        .i_rd_wen   (reg_write),
+        .i_rd_waddr (inst[11:7]),
+        .i_rd_wdata (writeback_data)
+    );
+
+    alu arithmetic_logic_unit (
+        .i_opsel   (alu_op),
+        .i_sub     (alu_sub),
+        .i_unsigned(alu_unsigned),
+        .i_arith   (alu_arith),
+        .i_op1     ((inst[6:0] == OPCODE_AUIPC) ? pc : rs1_data),
+        .i_op2     (alu_src ? immediate : rs2_data),
+        .o_result  (alu_result),
+        .o_eq      (alu_eq),
+        .o_slt     (alu_lt)
+    );
+
+    assign alu_ltu = (rs1_data < rs2_data);
+    assign writeback_data = jal | jalr ? pc_plus4 :
+                            mem_to_reg ? load_data :
+                            (inst[6:0] == OPCODE_LUI) ? immediate :
+                            alu_result;
+
+    assign byte_offset = alu_result[1:0];
+    assign o_dmem_addr = {alu_result[31:2], 2'b00};
+    assign o_dmem_ren = mem_read && !misaligned_data;
+    assign o_dmem_wen = mem_write && !misaligned_data;
+
+    assign dmem_mask = (inst[14:12] == 3'b000) ? (4'b0001 << byte_offset) :
+                       (inst[14:12] == 3'b001) ? (byte_offset[1] ? 4'b1100 : 4'b0011) :
+                       (inst[14:12] == 3'b010) ? 4'b1111 : 4'b0000;
+    assign o_dmem_mask = (mem_read | mem_write) ? dmem_mask : 4'b0000;
+
+    assign store_data = (inst[14:12] == 3'b000) ? {4{rs2_data[7:0]}} :
+                        (inst[14:12] == 3'b001) ? {2{rs2_data[15:0]}} :
+                        rs2_data;
+    assign o_dmem_wdata = store_data << (byte_offset * 8);
+
+    assign shifted_load_data = o_dmem_rdata >> (byte_offset * 8);
+    assign load_data = (inst[14:12] == 3'b000) ?
+                       {{24{shifted_load_data[7]}}, shifted_load_data[7:0]} :
+                       (inst[14:12] == 3'b100) ?
+                       {24'b0, shifted_load_data[7:0]} :
+                       (inst[14:12] == 3'b001) ?
+                       {{16{shifted_load_data[15]}}, shifted_load_data[15:0]} :
+                       (inst[14:12] == 3'b101) ?
+                       {16'b0, shifted_load_data[15:0]} :
+                       o_dmem_rdata;
+
+    assign misaligned_data = ((inst[14:12] == 3'b001) ||
+                              (inst[14:12] == 3'b101)) &&
+                             (alu_result[0] != 1'b0) |
+                             (inst[14:12] == 3'b010) &&
+                             (alu_result[1:0] != 2'b00);
+    assign target_address = (pc_sel == 2'b10) ? ((rs1_data + immediate) & ~32'd1) :
+                            (pc + immediate);
+    assign misaligned_target = (is_control_flow && (pc_sel != 2'b00) &&
+                                (pc_sel == 2'b10 ? ((rs1_data + immediate) & 32'd2) :
+                                                   ((pc + immediate) & 32'd3)));
+
+    assign o_retire_valid = 1'b1;
+    assign o_retire_inst = inst;
+    assign o_retire_trap = !is_supported || misaligned_data || misaligned_target;
+    assign o_retire_halt = (inst[6:0] == OPCODE_SYSTEM) &&
+                           (inst[31:20] == 12'b1);
+    assign o_retire_rs1_raddr = inst[19:15];
+    assign o_retire_rs2_raddr = inst[24:20];
+    assign o_retire_rs1_rdata = rs1_data;
+    assign o_retire_rs2_rdata = rs2_data;
+    assign o_retire_rd_waddr = reg_write ? inst[11:7] : 5'd0;
+    assign o_retire_rd_wdata = writeback_data;
+    assign o_retire_pc = pc;
+    assign o_retire_next_pc = (pc_sel == 2'b00) ? pc_plus4 : target_address;
+
 endmodule
 
 `default_nettype wire
