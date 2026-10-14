@@ -26,7 +26,9 @@ module control_unit(
    output wire       BranchTaken,
    // Signals selecting the jump target/writeback path
    output wire       JAL,
-   output wire       JALR
+   output wire       JALR,
+   // PC mux select: 00 = PC + 4, 01 = PC + immediate, 10 = rs1 + immediate
+   output wire [1:0] PC_sel
 );
 
    // Internal two-bit operation class produced by OP_Control.
@@ -63,5 +65,12 @@ module control_unit(
       .Funct3      (inst[14:12]),
       .BranchTaken (BranchTaken)
    );
+
+   // Select the next-PC source consumed by IF. JALR has priority so that
+   // an invalid combination of redirect controls cannot select the wrong
+   // target type.
+   assign PC_sel = JALR             ? 2'b10 :
+                   (JAL || BranchTaken) ? 2'b01 :
+                                          2'b00;
 
 endmodule

@@ -18,6 +18,7 @@ module control_unit_tb;
 	wire       BranchTaken;
 	wire       JAL;
 	wire       JALR;
+	wire [1:0] PC_sel;
 
 	integer tests;
 
@@ -35,7 +36,8 @@ module control_unit_tb;
 		.ALUop       (ALUop),
 		.BranchTaken (BranchTaken),
 		.JAL         (JAL),
-		.JALR        (JALR)
+		.JALR        (JALR),
+		.PC_sel      (PC_sel)
 	);
 
 	// expected_controls is {RegWrite, ALUsrc, MemToReg, MemRead, MemWrite,
@@ -115,6 +117,29 @@ module control_unit_tb;
 
 		// An unsupported opcode must not enable any side effect or branch.
 		check(32'h0000_0000, 1, 1, 1, 4'b0010, 9'b000000000);
+
+		// Verify the PC mux encoding used by IF:
+		// 00 = sequential, 01 = immediate target, 10 = JALR target.
+		inst = 32'h0000_0013; // addi: sequential
+		#1;
+		if (PC_sel !== 2'b00)
+			$fatal(1, "PC_sel mismatch for sequential instruction: %b", PC_sel);
+
+		inst = 32'h0080_00ef; // jal: PC + immediate
+		#1;
+		if (PC_sel !== 2'b01)
+			$fatal(1, "PC_sel mismatch for JAL: %b", PC_sel);
+
+		inst = 32'h0041_00e7; // jalr: rs1 + immediate
+		#1;
+		if (PC_sel !== 2'b10)
+			$fatal(1, "PC_sel mismatch for JALR: %b", PC_sel);
+
+		inst = 32'h0020_8463; // beq, taken
+		eq_input = 1'b1;
+		#1;
+		if (PC_sel !== 2'b01)
+			$fatal(1, "PC_sel mismatch for taken branch: %b", PC_sel);
 
 		$display("PASS: %0d control-unit assertions", tests);
 		$finish;
