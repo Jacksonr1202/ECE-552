@@ -176,7 +176,7 @@ module hart #(
     assign o_imem_raddr = pc;
     assign o_retire_valid = 1'b1;
     assign o_retire_inst = inst;
-    assign o_retire_trap = dmem_misaligned;
+    assign o_retire_trap = (mem_read || mem_write) && dmem_misaligned;
     assign o_retire_halt = (inst == 32'h0010_0073);
     assign o_retire_pc = pc;
     assign o_retire_next_pc = (PC_sel == 2'b00) ? pc_plus4 :
@@ -186,8 +186,8 @@ module hart #(
     assign o_retire_rs2_raddr = rs2_addr;
     assign o_retire_rs1_rdata = rs1_data;
     assign o_retire_rs2_rdata = rs2_data;
-    assign o_retire_rd_waddr = rd_addr;
-    assign o_retire_rd_wdata = rd_wdata;
+    assign o_retire_rd_waddr = reg_write ? rd_addr : 5'd0;
+    assign o_retire_rd_wdata = reg_write ? rd_wdata : 32'd0;
     control_unit control_unit (
         .inst(inst),
         .Eq(alu_eq),

@@ -6,22 +6,13 @@ module Branch_Control(
 	input  wire       LT,
 	input  wire       LTU,
 	input  wire [2:0] Funct3,
-	output reg        BranchTaken
+	output wire       BranchTaken
 );
-	always @(*) begin
-		BranchTaken = 1'b0;
-
-		if (Branch) begin
-			// funct3 selects signed, unsigned, equal, or inverse comparisons.
-			case (Funct3)
-				3'b000: BranchTaken = Eq;
-				3'b001: BranchTaken = ~Eq;
-				3'b100: BranchTaken = LT;
-				3'b101: BranchTaken = ~LT;
-				3'b110: BranchTaken = LTU;
-				3'b111: BranchTaken = ~LTU;
-				default: BranchTaken = 1'b0;
-			endcase
-		end
-	end
+	assign BranchTaken = !Branch ? 1'b0 :
+	                      (Funct3 == 3'b000) ? Eq :
+	                      (Funct3 == 3'b001) ? ~Eq :
+	                      (Funct3 == 3'b100) ? LT :
+	                      (Funct3 == 3'b101) ? ~LT :
+	                      (Funct3 == 3'b110) ? LTU :
+	                      (Funct3 == 3'b111) ? ~LTU : 1'b0;
 endmodule

@@ -4,9 +4,9 @@ module ALU_Control(
 	input  wire [1:0] ALU_Class,
 	input  wire [2:0] Funct3,
 	input  wire       Funct7,
-	output reg        ALU_sub,
-	output reg        ALU_arith,
-	output reg        ALU_unsigned,
+	output wire       ALU_sub,
+	output wire       ALU_arith,
+	output wire       ALU_unsigned,
 	output reg  [2:0] ALUop
 );
 	localparam [2:0] ALU_ADD_SUB  = 3'b000;
@@ -25,20 +25,8 @@ module ALU_Control(
 	localparam [1:0] ALU_CLASS_I_TYPE  = 2'b11;
 
 	always @(*) begin
-		ALU_sub = 1'b0;
-		ALU_arith = 1'b0;
-		ALU_unsigned = 1'b0;
 		// ADD is the safe result for unused or unsupported control combinations.
 		ALUop = ALU_ADD_SUB;
-		if (ALU_Class == ALU_CLASS_BRANCH) begin
-			ALU_sub = 1'b1;
-		end else if (ALU_Class == ALU_CLASS_R_TYPE) begin
-			ALU_sub = (Funct3 == 3'b000) && Funct7;
-			ALU_arith = (Funct3 == 3'b101) && Funct7;
-		end
-		ALU_unsigned = (Funct3 == 3'b011) ||
-		               ((ALU_Class == ALU_CLASS_BRANCH) &&
-		                ((Funct3 == 3'b110) || (Funct3 == 3'b111)));
 
 		case (ALU_Class)
 			ALU_CLASS_DEFAULT: ALUop = ALU_ADD_SUB;
@@ -77,4 +65,14 @@ module ALU_Control(
 			default: ALUop = ALU_ADD_SUB;
 		endcase
 	end
+
+	assign ALU_sub = (ALU_Class == ALU_CLASS_BRANCH) ||
+	                 ((ALU_Class == ALU_CLASS_R_TYPE) &&
+	                  (Funct3 == 3'b000) && Funct7);
+	assign ALU_arith = ((ALU_Class == ALU_CLASS_R_TYPE) ||
+	                    (ALU_Class == ALU_CLASS_I_TYPE)) &&
+	                   (Funct3 == 3'b101) && Funct7;
+	assign ALU_unsigned = (Funct3 == 3'b011) ||
+	                      ((ALU_Class == ALU_CLASS_BRANCH) &&
+	                       ((Funct3 == 3'b110) || (Funct3 == 3'b111)));
 endmodule
