@@ -21,16 +21,17 @@ module control_unit(
    // Signal to determine if we have a branch instruction
    output wire       Branch,
    // Signal determining the operation the ALU will do
+   output wire       ALU_sub,
+   output wire       ALU_arith,
+   output wire       ALU_unsigned,
    output wire [2:0] ALUop,
-   // Signal indicating if we should take the branch or not
-   output wire       BranchTaken,
    // Signals selecting the jump target/writeback path
    output wire       JAL,
    output wire       JALR,
    // PC mux select: 00 = PC + 4, 01 = PC + immediate, 10 = rs1 + immediate
    output wire [1:0] PC_sel
 );
-
+   wire BranchTaken;
    // Internal two-bit operation class produced by OP_Control.
    wire [1:0] ALUClass;
 
@@ -50,9 +51,12 @@ module control_unit(
 
    // Decode the operation within the selected ALU class.
    ALU_Control alu_control(
-      .ALUOp  (ALUClass),
+      .ALU_Class (ALUClass),
       .Funct3 (inst[14:12]),
       .Funct7 (inst[30]),
+      .ALU_sub (ALU_sub),
+      .ALU_arith (ALU_arith),
+      .ALU_unsigned (ALU_unsigned),
       .ALUop  (ALUop)
    );
 

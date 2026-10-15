@@ -131,6 +131,35 @@ module hart #(
     ,`RVFI_OUTPUTS,
 `endif
 );
+    wire [31:0] pc;
+    wire [31:0] inst;
+    wire [31:0] pc_plus4;
+    wire [31:0] imm;
+    wire [ 5:0] imm_select;
+    wire [ 4:0] rd_addr;
+    wire [ 4:0] rs1_addr;
+    wire [ 4:0] rs2_addr;
+    wire [31:0] rs1_data;
+    wire [31:0] rs2_data;
+    wire [31:0] rd_wdata;
+    wire [ 1:0] PC_sel;
+    wire [ 2:0] ALU_sel;
+    wire        ALU_src;
+    wire        ALU_sub;
+    wire        ALU_arith;
+    wire        ALU_unsigned;
+    wire        reg_write;
+    wire        mem_write;
+    wire        mem_read;
+    wire        mem_to_reg;
+    wire        branch;
+    wire        jal;
+    wire        jalr;
+    wire [31:0] alu_op2;
+    wire [31:0] alu_result;
+    wire        alu_eq;
+    wire        alu_slt;
+
     localparam [6:0] OPCODE_LOAD   = 7'b0000011;
     localparam [6:0] OPCODE_STORE  = 7'b0100011;
     localparam [6:0] OPCODE_BRANCH = 7'b1100011;
@@ -143,19 +172,35 @@ module hart #(
     localparam [6:0] OPCODE_SYSTEM = 7'b1110011;
 
     assign o_imem_raddr = pc;
-
+    assign o_retire_inst = inst;
+    assign o_retire_pc = pc;
+    assign o_retire_rs1_raddr = rs1_addr;
+    assign o_retire_rs2_raddr = rs2_addr;
+    assign o_retire_rs1_rdata = rs1_data;
+    assign o_retire_rs2_rdata = rs2_data;
+    assign o_retire_rd_waddr = rd_addr;
+    assign o_retire_rd_wdata = rd_wdata;
     control_unit control_unit (
-        .i_clk(i_clk),
-        .i_rst(i_rst),
-        .i_opcode(inst[6:0]),
-        .o_PC_sel(PC_sel),
-        .o_ALU_sel(ALU_sel),
-        .o_ALU_src(ALU_src),
-        .o_reg_write(reg_write),
-        .o_mem_write(mem_write),
-        .o_mem_read(mem_read),
-        .o_mem_to_reg(mem_to_reg)
+        .inst(inst),
+        .Eq(alu_eq),
+        .LT(alu_slt),
+        .LTU(alu_slt),
+        .RegWrite(reg_write),
+        .ALUsrc(ALU_src),
+        .MemToReg(mem_to_reg),
+        .MemRead(mem_read),
+        .MemWrite(mem_write),
+        .Branch(branch),
+        .ALU_sub(ALU_sub),
+        .ALU_arith(ALU_arith),
+        .ALU_unsigned(ALU_unsigned),
+        .ALUop(ALU_sel),
+        .JAL(jal),
+        .JALR(jalr),
+        .PC_sel(PC_sel)
     );
+    
+    //Instruction fetch
     IF #(
         .RESET_ADDR(RESET_ADDR)
     ) if_stage (
@@ -171,16 +216,30 @@ module hart #(
         .inst(inst)
     );
 
-    instruction_decoder instruction_decoder (
-        .instruction(inst),
-        .rd_addr(rd_addr),
-        .rs1_addr(rs1_addr),
-        .rs2_addr(rs2_addr),
-        .imm_select(imm_select)
+    // Immediate generator
+    imm imm_generation(
+        .i_inst(inst),
+        .i_format(imm_select),
+        .o_immediate(imm)
     );
 
+    // Instruction decode
+    assign rd_addr = inst[11:7];
+    assign rs1_addr = inst[19:15];
+    assign rs2_addr = inst[24:20];
+    assign imm_select[0] = (inst[6:0] == OPCODE_OP);
+    assign imm_select[1] = (inst[6:0] == OPCODE_OPIMM) |
+                           (inst[6:0] == OPCODE_LOAD) |
+                           (inst[6:0] == OPCODE_JALR);
+    assign imm_select[2] = (inst[6:0] == OPCODE_STORE);
+    assign imm_select[3] = (inst[6:0] == OPCODE_BRANCH);
+    assign imm_select[4] = (inst[6:0] == OPCODE_LUI) |
+                           (inst[6:0] == OPCODE_AUIPC);
+    assign imm_select[5] = (inst[6:0] == OPCODE_JAL);
+
+    //Register file with no bypassing
     rf #(
-        BYPASS_EN(0)
+        .BYPASS_EN(0)
     ) rf (
         .i_clk(i_clk),
         .i_rst(i_rst),
@@ -192,6 +251,21 @@ module hart #(
 
         .o_rs1_data(rs1_data),
         .o_rs2_data(rs2_data)
+    );
+
+    //ALU src mux
+    assign alu_op2 = ALU_src ? imm : rs2_data;
+    //ALU
+    alu alu (
+        .i_op1(rs1_data),
+        .i_op2(alu_op2),
+        .i_opsel(ALU_sel),
+        .i_sub(ALU_sub),
+        .i_unsigned(ALU_unsigned),
+        .i_arith(ALU_arith),
+        .o_result(alu_result),
+        .o_eq(alu_eq),
+        .o_slt(alu_slt)
     );
 
 endmodule
