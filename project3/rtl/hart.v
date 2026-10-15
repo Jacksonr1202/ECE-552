@@ -159,6 +159,8 @@ module hart #(
     wire [31:0] alu_result;
     wire        alu_eq;
     wire        alu_slt;
+    wire [31:0] load_data;
+    wire        dmem_misaligned;
 
     localparam [6:0] OPCODE_LOAD   = 7'b0000011;
     localparam [6:0] OPCODE_STORE  = 7'b0100011;
@@ -172,8 +174,14 @@ module hart #(
     localparam [6:0] OPCODE_SYSTEM = 7'b1110011;
 
     assign o_imem_raddr = pc;
+    assign o_retire_valid = 1'b1;
     assign o_retire_inst = inst;
+    assign o_retire_trap = dmem_misaligned;
+    assign o_retire_halt = (inst == 32'h0010_0073);
     assign o_retire_pc = pc;
+    assign o_retire_next_pc = (PC_sel == 2'b00) ? pc_plus4 :
+                              (PC_sel == 2'b01) ? pc + imm :
+                                                  (rs1_data + imm) & ~32'd1;
     assign o_retire_rs1_raddr = rs1_addr;
     assign o_retire_rs2_raddr = rs2_addr;
     assign o_retire_rs1_rdata = rs1_data;
@@ -243,14 +251,14 @@ module hart #(
     ) rf (
         .i_clk(i_clk),
         .i_rst(i_rst),
-        .i_rs1_addr(rs1_addr),
-        .i_rs2_addr(rs2_addr),
+        .i_rs1_raddr(rs1_addr),
+        .i_rs2_raddr(rs2_addr),
         .i_rd_waddr(rd_addr),
         .i_rd_wdata(rd_wdata),
-        .i_reg_write(reg_write),
+        .i_rd_wen(reg_write),
 
-        .o_rs1_data(rs1_data),
-        .o_rs2_data(rs2_data)
+        .o_rs1_rdata(rs1_data),
+        .o_rs2_rdata(rs2_data)
     );
 
     //ALU src mux
@@ -266,6 +274,34 @@ module hart #(
         .o_result(alu_result),
         .o_eq(alu_eq),
         .o_slt(alu_slt)
+    );
+
+    MAU mau (
+        .i_alu_result(alu_result),
+        .i_store_data(rs2_data),
+        .i_funct3(inst[14:12]),
+        .i_mem_read(mem_read),
+        .i_mem_write(mem_write),
+        .i_dmem_rdata(i_dmem_rdata),
+        .o_dmem_addr(o_dmem_addr),
+        .o_dmem_ren(o_dmem_ren),
+        .o_dmem_wen(o_dmem_wen),
+        .o_dmem_wdata(o_dmem_wdata),
+        .o_dmem_mask(o_dmem_mask),
+        .o_load_data(load_data),
+        .o_misaligned(dmem_misaligned)
+    );
+
+    writeback_mux writeback_mux (
+        .i_jal(jal),
+        .i_jalr(jalr),
+        .i_mem_to_reg(mem_to_reg),
+        .i_is_lui(inst[6:0] == OPCODE_LUI),
+        .i_pc_plus4(pc_plus4),
+        .i_load_data(load_data),
+        .i_immediate(imm),
+        .i_alu_result(alu_result),
+        .o_writeback_data(rd_wdata)
     );
 
 endmodule

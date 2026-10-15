@@ -135,7 +135,6 @@ module hart_tb ();
         end
 
         $display("Program halted after %d cycles.", cycles);
-        $finish;
     end
 
     always

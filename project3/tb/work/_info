@@ -1,0 +1,316 @@
+m255
+K4
+z2
+!s11f vlog 2024.1 2024.04, Apr 19 2024
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/Panda/OneDrive/Desktop/ECE552 repo/ECE-552/project3/tb
+valu
+Z1 2C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\alu.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\ALU_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\Branch_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\control_unit.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\hart.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\IF.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\imm.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\MAU.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\OP_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\rf.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\writeback_mux.v|.\tb.v
+Z2 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z3 !s110 1792102921
+!i10b 1
+!s100 89DU?WGUR=3?A1fGW8S=]3
+I7ah9NWm2DgfR]KBm9F33R0
+S1
+R0
+Z4 w1792091900
+8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\alu.v
+FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\alu.v
+!i122 1
+L0 8 154
+Z5 VDg1SIo80bB@j0V0VzS_@n1
+Z6 OL;L;2024.1;79
+r1
+!s85 0
+31
+Z7 !s108 1792102921.000000
+!s107 .\tb.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\writeback_mux.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\rf.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\OP_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\MAU.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\imm.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\IF.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\hart.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\control_unit.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\Branch_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\ALU_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\alu.v|
+Z8 !s90 -sv|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\alu.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\ALU_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\Branch_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\control_unit.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\hart.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\IF.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\imm.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\MAU.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\OP_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\rf.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\writeback_mux.v|.\tb.v|
+!i113 0
+Z9 o-sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z10 tCvgOpt 0
+vALU_Control
+R1
+R2
+R3
+!i10b 1
+!s100 MZRGbc0oZVILMZ:5U_AjV3
+IIVi_P6G1F5:bCnbn[U8@W0
+S1
+R0
+Z11 w1792098483
+8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\ALU_Control.v
+FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\ALU_Control.v
+!i122 1
+Z12 L0 3 78
+R5
+R6
+r1
+!s85 0
+31
+R7
+Z13 !s107 .\tb.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\writeback_mux.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\rf.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\OP_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\MAU.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\imm.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\IF.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\hart.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\control_unit.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\Branch_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\ALU_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\alu.v|
+R8
+!i113 0
+R9
+R10
+n@a@l@u_@control
+vBranch_Control
+R1
+R2
+R3
+!i10b 1
+!s100 <cTD]En^:SmU;_GWY4oZG1
+IoM>dLZj^KLPP2E=IgQEUN3
+S1
+R0
+R4
+8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\Branch_Control.v
+FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\Branch_Control.v
+!i122 1
+L0 3 25
+R5
+R6
+r1
+!s85 0
+31
+R7
+R13
+R8
+!i113 0
+R9
+R10
+n@branch_@control
+vcontrol_unit
+R1
+R2
+R3
+!i10b 1
+!s100 OB;_>AIco:PN`;NNL[?P@0
+IDg5<z?Q[k=ok0`PNL[oI_3
+S1
+R0
+R11
+8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\control_unit.v
+FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\control_unit.v
+!i122 1
+R12
+R5
+R6
+r1
+!s85 0
+31
+R7
+R13
+R8
+!i113 0
+R9
+R10
+vhart
+R1
+R2
+R3
+!i10b 1
+!s100 dc4IQjHJP_<C8ZUl0Il0;2
+II:zQXZPaA;GSCPLmX8Ege2
+S1
+R0
+w1792102190
+8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\hart.v
+FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\hart.v
+!i122 1
+L0 1 307
+R5
+R6
+r1
+!s85 0
+31
+R7
+R13
+R8
+!i113 0
+R9
+R10
+vhart_tb
+R1
+R2
+R3
+!i10b 1
+!s100 1]>I=Vj7`15loDX:z`ZL53
+IzTiijC66:N<EbGHa_]FiL3
+S1
+R0
+w1792102618
+8.\tb.v
+F.\tb.v
+!i122 1
+L0 1 142
+R5
+R6
+r1
+!s85 0
+31
+R7
+R13
+R8
+!i113 0
+R9
+R10
+vIF
+R1
+R2
+R3
+!i10b 1
+!s100 XzI9_zZYd8KnbjM<Qd2P>2
+I[DSYTETaVeGYOB46;8<jn1
+S1
+R0
+R4
+8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\IF.v
+FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\IF.v
+!i122 1
+L0 1 43
+R5
+R6
+r1
+!s85 0
+31
+R7
+R13
+R8
+!i113 0
+R9
+R10
+n@i@f
+vimm
+R1
+R2
+R3
+!i10b 1
+!s100 ;<XW7F>zzI;n[oLWfg[1<2
+IBWCV_McJMBA8X<3G;=NI40
+S1
+R0
+R4
+8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\imm.v
+FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\imm.v
+!i122 1
+L0 6 39
+R5
+R6
+r1
+!s85 0
+31
+R7
+R13
+R8
+!i113 0
+R9
+R10
+vMAU
+R1
+R2
+R3
+!i10b 1
+!s100 7L88JJigzmVi:m[WWRPXo1
+I0U4X_he^?Zi^mE3bncF`e1
+S1
+R0
+w1792102070
+8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\MAU.v
+FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\MAU.v
+!i122 1
+L0 5 57
+R5
+R6
+r1
+!s85 0
+31
+R7
+R13
+R8
+!i113 0
+R9
+R10
+n@m@a@u
+vOP_Control
+R1
+R2
+R3
+!i10b 1
+!s100 0f_FcPSCIzNX?]7Wmdzj;1
+IRDP_N2=hmNSd_Ph]hL:JC2
+S1
+R0
+R4
+8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\OP_Control.v
+FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\OP_Control.v
+!i122 1
+L0 3 87
+R5
+R6
+r1
+!s85 0
+31
+R7
+R13
+R8
+!i113 0
+R9
+R10
+n@o@p_@control
+vrf
+R1
+R2
+R3
+!i10b 1
+!s100 MDPH0HT5>HMA3BWYl5WGe3
+I>HF65lLoCKAVT@fMBOhN23
+S1
+R0
+R4
+8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\rf.v
+FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\rf.v
+!i122 1
+L0 8 59
+R5
+R6
+r1
+!s85 0
+31
+R7
+R13
+R8
+!i113 0
+R9
+R10
+vwriteback_mux
+R1
+R2
+R3
+!i10b 1
+!s100 @i<DeoL56LFC27:V8B[TX0
+I4YAz:MUX?=X8SazY<dGEJ1
+S1
+R0
+R4
+8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\writeback_mux.v
+FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\writeback_mux.v
+!i122 1
+L0 4 16
+R5
+R6
+r1
+!s85 0
+31
+R7
+R13
+R8
+!i113 0
+R9
+R10

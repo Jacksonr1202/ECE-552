@@ -10,9 +10,9 @@ z2
 cModel Technology
 Z0 dC:/Users/Panda/OneDrive/Desktop/ECE552 repo/ECE-552
 valu
-Z1 2C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\alu.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\ALU_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\Branch_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\control_unit.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\hart.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\IF.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\imm.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\MAU.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\OP_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\rf.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\writeback_mux.v
+Z1 2C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\alu.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\ALU_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\Branch_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\control_unit.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\hart.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\IF.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\imm.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\MAU.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\OP_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\rf.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\writeback_mux.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\tb\tb.v
 Z2 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z3 !s110 1792098559
+Z3 !s110 1792102212
 !i10b 1
 !s100 89DU?WGUR=3?A1fGW8S=]3
 IPUmbEHRE[Y>9ZV:@NXC`^3
@@ -21,16 +21,16 @@ R0
 Z4 w1792091900
 8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\alu.v
 FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\alu.v
-!i122 6
+!i122 8
 L0 8 154
 Z5 VDg1SIo80bB@j0V0VzS_@n1
 Z6 OL;L;2024.1;79
 r1
 !s85 0
 31
-Z7 !s108 1792098558.000000
-!s107 C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\writeback_mux.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\rf.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\OP_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\MAU.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\imm.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\IF.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\hart.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\control_unit.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\Branch_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\ALU_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\alu.v|
-Z8 !s90 -quiet|-sv|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\alu.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\ALU_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\Branch_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\control_unit.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\hart.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\IF.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\imm.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\MAU.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\OP_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\rf.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\writeback_mux.v|
+Z7 !s108 1792102212.000000
+!s107 C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\tb\tb.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\writeback_mux.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\rf.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\OP_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\MAU.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\imm.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\IF.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\hart.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\control_unit.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\Branch_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\ALU_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\alu.v|
+Z8 !s90 -quiet|-sv|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\alu.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\ALU_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\Branch_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\control_unit.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\hart.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\IF.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\imm.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\MAU.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\OP_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\rf.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\writeback_mux.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\tb\tb.v|
 !i113 0
 Z9 o-quiet -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 Z10 tCvgOpt 0
@@ -46,7 +46,7 @@ R0
 Z11 w1792098483
 8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\ALU_Control.v
 FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\ALU_Control.v
-!i122 6
+!i122 8
 Z12 L0 3 78
 R5
 R6
@@ -54,7 +54,7 @@ r1
 !s85 0
 31
 R7
-Z13 !s107 C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\writeback_mux.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\rf.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\OP_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\MAU.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\imm.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\IF.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\hart.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\control_unit.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\Branch_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\ALU_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\alu.v|
+Z13 !s107 C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\tb\tb.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\writeback_mux.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\rf.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\OP_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\MAU.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\imm.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\IF.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\hart.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\control_unit.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\Branch_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\ALU_Control.v|C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\alu.v|
 R8
 !i113 0
 R9
@@ -72,7 +72,7 @@ R0
 R4
 8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\Branch_Control.v
 FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\Branch_Control.v
-!i122 6
+!i122 8
 L0 3 25
 R5
 R6
@@ -98,7 +98,7 @@ R0
 R11
 8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\control_unit.v
 FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\control_unit.v
-!i122 6
+!i122 8
 R12
 R5
 R6
@@ -116,15 +116,40 @@ R1
 R2
 R3
 !i10b 1
-!s100 X]02fzVGXWJXNknjCBg;[0
-I<U<z]FI^;hURTKGjn4kLO3
+!s100 dc4IQjHJP_<C8ZUl0Il0;2
+IlMRo6`L<RfW5Wg1OJA`<i2
 S1
 R0
-w1792098553
+w1792102190
 8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\hart.v
 FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\hart.v
-!i122 6
-L0 1 268
+!i122 8
+L0 1 307
+R5
+R6
+r1
+!s85 0
+31
+R7
+R13
+R8
+!i113 0
+R9
+R10
+vhart_tb
+R1
+R2
+R3
+!i10b 1
+!s100 =Ia3zjVGk=IJX`oVGa3JF0
+Ioo>_A1YzIlF0MQT9=321@1
+S1
+R0
+R4
+8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\tb\tb.v
+FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\tb\tb.v
+!i122 8
+L0 1 143
 R5
 R6
 r1
@@ -148,7 +173,7 @@ R0
 R4
 8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\IF.v
 FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\IF.v
-!i122 6
+!i122 8
 L0 1 43
 R5
 R6
@@ -174,7 +199,7 @@ R0
 R4
 8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\imm.v
 FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\imm.v
-!i122 6
+!i122 8
 L0 6 39
 R5
 R6
@@ -192,15 +217,15 @@ R1
 R2
 R3
 !i10b 1
-!s100 CEXYVVAf8c_E@XJF7j]lm0
-IiaX6Z1JCoHVDa>]g1P26<2
+!s100 7L88JJigzmVi:m[WWRPXo1
+IbA7<?Gk_ezb@JYa;R1gVh2
 S1
 R0
-R4
+w1792102070
 8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\MAU.v
 FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\MAU.v
-!i122 6
-L0 5 55
+!i122 8
+L0 5 57
 R5
 R6
 r1
@@ -225,7 +250,7 @@ R0
 R4
 8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\OP_Control.v
 FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\OP_Control.v
-!i122 6
+!i122 8
 L0 3 87
 R5
 R6
@@ -251,7 +276,7 @@ R0
 R4
 8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\rf.v
 FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\rf.v
-!i122 6
+!i122 8
 L0 8 59
 R5
 R6
@@ -276,7 +301,7 @@ R0
 R4
 8C:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\writeback_mux.v
 FC:\Users\Panda\OneDrive\Desktop\ECE552 repo\ECE-552\project3\rtl\writeback_mux.v
-!i122 6
+!i122 8
 L0 4 16
 R5
 R6
