@@ -10,9 +10,10 @@ module OP_Control(
 	output reg        Branch,
 	output reg  [1:0] ALUOp,
 	output reg        JAL,
-	output reg        JALR
+	output reg        JALR,
+	output reg        AUIPC
 );
-	// RV32I base integer instruction opcodes.
+	// RV32I opcodes.
 	localparam [6:0] OPCODE_U_LUI       = 7'b0110111;
 	localparam [6:0] OPCODE_U_AUIPC     = 7'b0010111;
 	localparam [6:0] OPCODE_J_TYPE      = 7'b1101111;
@@ -23,14 +24,13 @@ module OP_Control(
 	localparam [6:0] OPCODE_I_TYPE      = 7'b0010011;
 	localparam [6:0] OPCODE_R_TYPE      = 7'b0110011;
 
-	// ALU class values passed to ALU_Control through the ALUOp port.
+	// ALU class values
 	localparam [1:0] ALU_CLASS_DEFAULT  = 2'b00;
 	localparam [1:0] ALU_CLASS_BRANCH   = 2'b01;
 	localparam [1:0] ALU_CLASS_R_TYPE   = 2'b10;
 	localparam [1:0] ALU_CLASS_I_TYPE   = 2'b11;
 
 	always @(*) begin
-		// Unsupported opcodes remain inactive by default.
 		RegWrite = 1'b0;
 		ALUsrc   = 1'b0;
 		MemToReg = 1'b0;
@@ -40,13 +40,18 @@ module OP_Control(
 		ALUOp    = ALU_CLASS_DEFAULT;
 		JAL      = 1'b0;
 		JALR     = 1'b0;
+		AUIPC    = 1'b0;
 
 		case (Opcode)
 			// LUI and AUIPC both use an immediate source and write a result.
-			OPCODE_U_LUI,
+			OPCODE_U_LUI: begin
+				RegWrite = 1'b1;
+				ALUsrc   = 1'b1;
+			end
 			OPCODE_U_AUIPC: begin
 				RegWrite = 1'b1;
 				ALUsrc   = 1'b1;
+				AUIPC    = (Opcode == OPCODE_U_AUIPC);
 			end
 			OPCODE_J_TYPE: begin
 				RegWrite = 1'b1;

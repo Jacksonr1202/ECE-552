@@ -28,6 +28,7 @@ module control_unit(
    // Signals selecting the jump target/writeback path
    output wire       JAL,
    output wire       JALR,
+   output wire       AUIPC,
    // PC mux select: 00 = PC + 4, 01 = PC + immediate, 10 = rs1 + immediate
    output wire [1:0] PC_sel
 );
@@ -46,7 +47,8 @@ module control_unit(
       .Branch   (Branch),
       .ALUOp    (ALUClass),
       .JAL      (JAL),
-      .JALR     (JALR)
+      .JALR     (JALR),
+      .AUIPC    (AUIPC)
    );
 
    // Decode the operation within the selected ALU class.

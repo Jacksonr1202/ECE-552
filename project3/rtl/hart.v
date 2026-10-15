@@ -155,6 +155,8 @@ module hart #(
     wire        branch;
     wire        jal;
     wire        jalr;
+    wire        auipc;
+    wire [31:0] alu_op1;
     wire [31:0] alu_op2;
     wire [31:0] alu_result;
     wire        alu_eq;
@@ -177,7 +179,7 @@ module hart #(
     assign o_retire_valid = 1'b1;
     assign o_retire_inst = inst;
     assign o_retire_trap = (mem_read || mem_write) && dmem_misaligned;
-    assign o_retire_halt = (inst == 32'h0010_0073);
+    assign o_retire_halt = (inst == 32'h0010_0073); //EBREAK instruction
     assign o_retire_pc = pc;
     assign o_retire_next_pc = (PC_sel == 2'b00) ? pc_plus4 :
                               (PC_sel == 2'b01) ? pc + imm :
@@ -205,6 +207,7 @@ module hart #(
         .ALUop(ALU_sel),
         .JAL(jal),
         .JALR(jalr),
+        .AUIPC(auipc),
         .PC_sel(PC_sel)
     );
     
@@ -262,10 +265,11 @@ module hart #(
     );
 
     //ALU src mux
+    assign alu_op1 = auipc ? pc : rs1_data;
     assign alu_op2 = ALU_src ? imm : rs2_data;
     //ALU
     alu alu (
-        .i_op1(rs1_data),
+        .i_op1(alu_op1),
         .i_op2(alu_op2),
         .i_opsel(ALU_sel),
         .i_sub(ALU_sub),
