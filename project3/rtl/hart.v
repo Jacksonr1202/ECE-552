@@ -150,11 +150,8 @@ module hart #(
     wire [31:0] rs2_data;
     wire [31:0] alu_result;
     wire [31:0] load_data;
-    wire [31:0] shifted_load_data;
     wire [31:0] writeback_data;
-    wire [31:0] store_data;
     wire [31:0] target_address;
-    wire [3:0]  dmem_mask;
     wire [1:0]  pc_sel;
     wire [2:0]  alu_op;
     wire        reg_write;
@@ -179,7 +176,6 @@ module hart #(
     wire        is_supported;
     wire        misaligned_data;
     wire        misaligned_target;
-    wire [1:0]  byte_offset;
 
     assign o_imem_raddr = pc;
 
@@ -287,42 +283,33 @@ module hart #(
     );
 
     assign alu_ltu = (rs1_data < rs2_data);
-    assign writeback_data = jal | jalr ? pc_plus4 :
-                            mem_to_reg ? load_data :
-                            (inst[6:0] == OPCODE_LUI) ? immediate :
-                            alu_result;
+    writeback_mux writeback (
+        .i_jal           (jal),
+        .i_jalr          (jalr),
+        .i_mem_to_reg    (mem_to_reg),
+        .i_is_lui        (inst[6:0] == OPCODE_LUI),
+        .i_pc_plus4      (pc_plus4),
+        .i_load_data     (load_data),
+        .i_immediate     (immediate),
+        .i_alu_result    (alu_result),
+        .o_writeback_data(writeback_data)
+    );
 
-    assign byte_offset = alu_result[1:0];
-    assign o_dmem_addr = {alu_result[31:2], 2'b00};
-    assign o_dmem_ren = mem_read && !misaligned_data;
-    assign o_dmem_wen = mem_write && !misaligned_data;
-
-    assign dmem_mask = (inst[14:12] == 3'b000) ? (4'b0001 << byte_offset) :
-                       (inst[14:12] == 3'b001) ? (byte_offset[1] ? 4'b1100 : 4'b0011) :
-                       (inst[14:12] == 3'b010) ? 4'b1111 : 4'b0000;
-    assign o_dmem_mask = (mem_read | mem_write) ? dmem_mask : 4'b0000;
-
-    assign store_data = (inst[14:12] == 3'b000) ? {4{rs2_data[7:0]}} :
-                        (inst[14:12] == 3'b001) ? {2{rs2_data[15:0]}} :
-                        rs2_data;
-    assign o_dmem_wdata = store_data << (byte_offset * 8);
-
-    assign shifted_load_data = o_dmem_rdata >> (byte_offset * 8);
-    assign load_data = (inst[14:12] == 3'b000) ?
-                       {{24{shifted_load_data[7]}}, shifted_load_data[7:0]} :
-                       (inst[14:12] == 3'b100) ?
-                       {24'b0, shifted_load_data[7:0]} :
-                       (inst[14:12] == 3'b001) ?
-                       {{16{shifted_load_data[15]}}, shifted_load_data[15:0]} :
-                       (inst[14:12] == 3'b101) ?
-                       {16'b0, shifted_load_data[15:0]} :
-                       o_dmem_rdata;
-
-    assign misaligned_data = ((inst[14:12] == 3'b001) ||
-                              (inst[14:12] == 3'b101)) &&
-                             (alu_result[0] != 1'b0) |
-                             (inst[14:12] == 3'b010) &&
-                             (alu_result[1:0] != 2'b00);
+    MAU memory_access (
+        .i_alu_result (alu_result),
+        .i_store_data (rs2_data),
+        .i_funct3     (inst[14:12]),
+        .i_mem_read   (mem_read),
+        .i_mem_write  (mem_write),
+        .i_dmem_rdata (i_dmem_rdata),
+        .o_dmem_addr  (o_dmem_addr),
+        .o_dmem_ren   (o_dmem_ren),
+        .o_dmem_wen   (o_dmem_wen),
+        .o_dmem_wdata (o_dmem_wdata),
+        .o_dmem_mask  (o_dmem_mask),
+        .o_load_data  (load_data),
+        .o_misaligned (misaligned_data)
+    );
     assign target_address = (pc_sel == 2'b10) ? ((rs1_data + immediate) & ~32'd1) :
                             (pc + immediate);
     assign misaligned_target = (is_control_flow && (pc_sel != 2'b00) &&
